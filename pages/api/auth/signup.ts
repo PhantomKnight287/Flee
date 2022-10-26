@@ -1,4 +1,5 @@
 import { hash } from "bcrypt";
+import { sign } from "jsonwebtoken";
 import { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../../lib/db";
 
@@ -35,5 +36,16 @@ export default async function SignUpRoute(
       id: true,
     },
   });
-  return res.status(200).json(newUser);
+  const token = sign(
+    {
+      username: newUser.username,
+      id: newUser.id,
+    },
+    process.env.JWT_SECRET!
+  );
+  return res.status(200).json({
+    token,
+    username: newUser.username,
+    id: newUser.id,
+  });
 }
