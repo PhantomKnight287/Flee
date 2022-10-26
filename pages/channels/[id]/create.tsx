@@ -40,6 +40,7 @@ export default function CreatePostRoute() {
           message: "Post Created",
           color: "green",
         });
+        formState.reset()
       })
       .catch((err) => {
         console.log(err.response);

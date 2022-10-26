@@ -70,6 +70,7 @@ export default function AllChannels() {
       .then((data) => {
         fetchChannels(cursor);
         setNewChannelModalOpened(false);
+        formState.reset()
       })
       .catch((err) => {
         showNotification({
