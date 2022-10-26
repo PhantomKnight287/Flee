@@ -46,4 +46,4 @@ The content of a `Post` supports `Markdown` with limited features. The markdown 
 - ol
 - s
 - del
-- m
+- em
