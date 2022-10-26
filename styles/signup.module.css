@@ -1,0 +1,10 @@
+.container {
+  min-height: 100%;
+  place-items: center;
+  margin-top: calc(15vh - 2rem);
+}
+
+.asterisk {
+  color: #fa5252;
+  box-sizing: border-box;
+}
