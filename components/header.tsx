@@ -138,6 +138,12 @@ export function HeaderMegaMenu() {
             >
               Home
             </Link>
+            <Link
+              href="/channels"
+              className={`${classes.link} ${username ? "opacity-0" : ""}`}
+            >
+              Channels
+            </Link>
           </Group>
 
           <Group
@@ -226,7 +232,12 @@ export function HeaderMegaMenu() {
           >
             Home
           </Link>
-
+          <Link
+            href="/channels"
+            className={`${classes.link} ${username ? "opacity-0" : ""}`}
+          >
+            Channels
+          </Link>
           <Divider
             my="sm"
             color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
