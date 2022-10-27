@@ -12,7 +12,8 @@ const handler: NextApiHandler = async (req, res) => {
     return res.status(401).json({
       message: "No Auth Token found",
     });
-  const { title, content, channelId } = req.body;
+  const { title, content } = req.body;
+  const channelId = req.query.id as string
   if (!title)
     return res.status(400).json({ message: "Title of post is required" });
   if (!content)

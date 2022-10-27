@@ -5,7 +5,7 @@ import { prisma } from "@lib/db";
 import { NextApiHandler } from "next";
 
 const handler: NextApiHandler = async (req, res) => {
-  const id = req.body.id as string;
+  const id = req.query.id as string;
   const posts = await prisma.posts.findMany({
     where: {
       channelsId: id,

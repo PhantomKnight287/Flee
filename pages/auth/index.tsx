@@ -12,7 +12,7 @@ import {
 } from "@mantine/core";
 import { useToggle } from "@mantine/hooks";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useUser, useUserDispatch } from "@hooks/user";
 import { showNotification } from "@mantine/notifications";
 import styles from "@styles/signup.module.css";
@@ -51,6 +51,10 @@ export default function SignUp() {
   useEffect(() => {
     if (user.id && readCookie("token")) return void replace("/channels");
   }, [user.id]);
+
+  useEffect(() => {
+    if (user.username) return void replace("/channels");
+  }, []);
   useEffect(() => {
     const type = (query.type as string)?.toLowerCase();
     if (type !== "login" && type !== "signup")
