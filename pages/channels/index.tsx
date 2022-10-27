@@ -24,17 +24,17 @@ export default function AllChannels() {
   const [channels, setChannels] = useState<
     { id: string; posts: number; name: string }[]
   >([]);
-  const [cursor, setCursor] = useState(10);
+  const [skip, setSkip] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  const fetchChannels = (cur: number) => {
+  const fetchChannels = (s: number) => {
     setLoading(true);
     axios
-      .get(`/api/channels?cursor=${cur}`)
+      .get(`/api/channels?skip=${s}`)
       .then((d) => d.data)
       .then((d) => {
         if (d.data.length) setChannels(d.data);
-        if (d.data.nextCursor) setCursor(d.nextCursor);
+        setSkip((d) => d + 10);
       })
       .catch((err) => {
         console.log(err);
@@ -45,7 +45,7 @@ export default function AllChannels() {
   const { id } = useUser();
   const { push } = useRouter();
   useEffect(() => {
-    fetchChannels(cursor);
+    fetchChannels(skip);
   }, []);
   const formState = useForm({
     initialValues: {
@@ -68,9 +68,9 @@ export default function AllChannels() {
       )
       .then((d) => d.data)
       .then((data) => {
-        fetchChannels(cursor);
+        fetchChannels(skip);
         setNewChannelModalOpened(false);
-        formState.reset()
+        formState.reset();
       })
       .catch((err) => {
         showNotification({
@@ -130,11 +130,32 @@ export default function AllChannels() {
                     ))}
                   </tbody>
                 </Table>
+                {channels.length > 0 && channels.length % 10 === 0 ? (
+                  <>
+                    <Group position="center" my="xl">
+                      <Button
+                        color="dark"
+                        variant="filled"
+                        className={clsx(
+                          "hover:scale-110 duration-[110ms] text-white bg-blue-800  hover:bg-blue-500 "
+                        )}
+                        loading={loading}
+                        sx={(t) => ({
+                          fontFamily: `Greycliff CF, ${t.fontFamily}`,
+                        })}
+                        onClick={() => {
+                          fetchChannels(skip);
+                        }}
+                      >
+                        Load More
+                      </Button>
+                    </Group>
+                  </>
+                ) : null}
                 <Group position="center" mt="xl">
                   <Button
                     color="dark"
                     variant="filled"
-                    type="submit"
                     className={clsx(
                       "hover:scale-110 duration-[110ms] text-white bg-blue-800  hover:bg-blue-500 "
                     )}

@@ -1,5 +1,13 @@
 import { GetFilteredHTML } from "@helpers/filter";
-import { Avatar, Container, Group, Text, Title } from "@mantine/core";
+import {
+  Avatar,
+  Button,
+  Container,
+  Divider,
+  Group,
+  Text,
+  Title,
+} from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import { IconArrowDown, IconArrowUp } from "@tabler/icons";
 import axios from "axios";
@@ -62,7 +70,9 @@ const PostPage: NextPage<
         <title>{props.title}</title>
       </Head>
       <Container my="xl">
-        <Title align="center" className="text-md">{props.title}</Title>
+        <Title align="center" className="text-md">
+          {props.title}
+        </Title>
         <div className="flex flex-row flex-1 justify-center">
           <Group position="center" m="xl">
             <Avatar
@@ -77,26 +87,31 @@ const PostPage: NextPage<
             __html: GetFilteredHTML(props.content),
           }}
         ></div>
-        <Group position="center">
+        <Divider my="xl" />
+        <Group position="center" mt="xl">
           <div className="flex flex-row flex-wrap">
             <>
-              {upvotes.toString()}
-              <IconArrowUp
-                size={24}
-                className="cursor-pointer"
+              <Button
+                color="violet"
+                radius="xl"
+                className="bg-violet-600"
                 onClick={upvote}
-              />
+              >
+                {upvotes.toString()}
+                <IconArrowUp size={24} className="cursor-pointer" />
+              </Button>
             </>
           </div>
           <div className="flex flex-row flex-wrap">
-            <>
+            <Button
+              color="violet"
+              radius={"xl"}
+              className="bg-violet-600"
+              onClick={downvote}
+            >
               {downvotes.toString()}
-              <IconArrowDown
-                size={24}
-                className="cursor-pointere"
-                onClick={downvote}
-              />
-            </>
+              <IconArrowDown size={24} className="cursor-pointer" />
+            </Button>
           </div>
         </Group>
       </Container>

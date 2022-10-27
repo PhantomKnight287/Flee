@@ -12,6 +12,7 @@ import {
 import { IconArrowDown, IconArrowUp } from "@tabler/icons";
 import axios from "axios";
 import clsx from "clsx";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -53,6 +54,11 @@ export default function DynamicChannelsPage() {
 
   return (
     <>
+    <Head>
+      <title>
+        All Posts
+      </title>
+    </Head>
       <div className="flex flex-col h-screen justify-center -z-10 ">
         <Container className="overflow-y-scroll">
           {loading === true ? (
