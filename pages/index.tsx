@@ -1,4 +1,5 @@
 import { FeaturesGrid } from "@components/landing";
+import { MetaTags } from "@components/Meta";
 import { useUser } from "@hooks/user";
 import { Button, Container, Grid, Group } from "@mantine/core";
 import type { NextPage } from "next";
@@ -10,10 +11,10 @@ const Home: NextPage = () => {
   const user = useUser();
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      <Head>
-        <title>Flee</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <MetaTags
+        title="Flee"
+        description="Share Your Thoughts or Views Anonymously"
+      />
       <FeaturesGrid
         description="Share Your Thoughts or Views Anonymously"
         title="Flee"

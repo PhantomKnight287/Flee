@@ -1,3 +1,4 @@
+import { MetaTags } from "@components/Meta";
 import { GetFilteredHTML } from "@helpers/filter";
 import {
   Avatar,
@@ -66,9 +67,10 @@ const PostPage: NextPage<
 
   return (
     <div>
-      <Head>
-        <title>{props.title}</title>
-      </Head>
+      <MetaTags
+        title={props.title}
+        description={`A Post by ${props.User.username} with ${props.upvotes} upvotes`}
+      />
       <Container my="xl">
         <Title align="center" className="text-md">
           {props.title}

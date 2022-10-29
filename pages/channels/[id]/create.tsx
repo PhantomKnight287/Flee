@@ -1,3 +1,4 @@
+import { MetaTags } from "@components/Meta";
 import {
   Button,
   Container,
@@ -40,7 +41,7 @@ export default function CreatePostRoute() {
           message: "Post Created",
           color: "green",
         });
-        formState.reset()
+        formState.reset();
       })
       .catch((err) => {
         console.log(err.response);
@@ -48,9 +49,10 @@ export default function CreatePostRoute() {
   };
   return (
     <>
-      <Head>
-        <title>Create A New Post</title>
-      </Head>
+      <MetaTags
+        title="Create New Post"
+        description="Create New Post to share it with People"
+      />
       <Container mt="xl">
         <Title align="center">Create New Post</Title>
         <form onSubmit={formState.onSubmit((e) => createPost(e))}>
