@@ -22,6 +22,9 @@ const handler: NextApiHandler = async (req, res) => {
       title: true,
       id: true,
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
   return res.status(200).json(posts);
 };

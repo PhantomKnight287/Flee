@@ -1,6 +1,8 @@
+import { MetaTags } from "@components/Meta";
 import { GetFilteredHTML } from "@helpers/filter";
 import {
   Avatar,
+  Badge,
   Button,
   Container,
   Divider,
@@ -66,20 +68,33 @@ const PostPage: NextPage<
 
   return (
     <div>
-      <Head>
-        <title>{props.title}</title>
-      </Head>
+      <MetaTags
+        title={props.title}
+        description={`A Post by ${props.User.username} with ${props.upvotes} upvotes`}
+      />
       <Container my="xl">
         <Title align="center" className="text-md">
           {props.title}
         </Title>
-        <div className="flex flex-row flex-1 justify-center">
+        <div className="flex flex-col flex-1 justify-center">
           <Group position="center" m="xl">
             <Avatar
               src={`https://avatars.dicebear.com/api/big-smile/${props.User.username}.svg`}
               radius="xl"
             />
             <Text>{props.User.username}</Text>
+          </Group>
+          <Group
+            sx={{
+              overflowX: "scroll",
+            }}
+            position="center"
+          >
+            {props.tags?.map((tag) => (
+              <Badge className="cursor-pointer" key={tag.id}>
+                {tag.name}
+              </Badge>
+            ))}
           </Group>
         </div>
         <div
@@ -127,6 +142,10 @@ export const getServerSideProps: GetServerSideProps<{
   User: {
     username: string;
   };
+  tags: {
+    name: string;
+    id: string;
+  }[];
 }> = async (context) => {
   const { title, id } = context.params!;
   const data = await axios

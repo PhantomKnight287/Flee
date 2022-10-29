@@ -19,6 +19,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { showNotification } from "@mantine/notifications";
 import Link from "next/link";
+import { MetaTags } from "@components/Meta";
 
 export default function AllChannels() {
   const [channels, setChannels] = useState<
@@ -82,9 +83,10 @@ export default function AllChannels() {
 
   return (
     <>
-      <Head>
-        <title>Channels</title>
-      </Head>
+      <MetaTags
+        title="Channels"
+        description="View All Channels Available or Create New Ones"
+      />
       <div className="flex flex-col items-center justify-center h-screen">
         {loading ? (
           <>

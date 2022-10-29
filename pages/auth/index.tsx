@@ -22,6 +22,7 @@ import { createCookie, readCookie } from "@helpers/cookies";
 import { User } from "@prisma/client";
 import { clsx } from "clsx";
 import { titleCase } from "@helpers/casing";
+import { MetaTags } from "@components/Meta";
 
 export default function SignUp() {
   const form = useForm({
@@ -109,15 +110,10 @@ export default function SignUp() {
 
   return (
     <div className={styles.container}>
-      <Head>
-        <title>
-          {formType === "login" ? "Welcome Back" : "Create An Account"}
-        </title>
-        <meta
-          content={"Get Started by Creating an account or logging into one."}
-          name="description"
-        />
-      </Head>
+      <MetaTags
+        title={formType === "login" ? "Welcome Back" : "Create An Account"}
+        description={"Get Started by Creating an account or logging into one."}
+      />
 
       <Container size={420} my={40}>
         {formType === "signup" ? (

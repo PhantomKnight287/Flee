@@ -1,3 +1,4 @@
+import { MetaTags } from "@components/Meta";
 import { useUser } from "@hooks/user";
 import {
   Avatar,
@@ -54,11 +55,10 @@ export default function DynamicChannelsPage() {
 
   return (
     <>
-    <Head>
-      <title>
-        All Posts
-      </title>
-    </Head>
+      <MetaTags
+        title="All Posts"
+        description="View All Posts Available in a Channel."
+      />
       <div className="flex flex-col h-screen justify-center -z-10 ">
         <Container className="overflow-y-scroll">
           {loading === true ? (
