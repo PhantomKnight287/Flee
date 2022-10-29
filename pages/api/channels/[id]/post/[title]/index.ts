@@ -21,6 +21,12 @@ const hanlder: NextApiHandler = async (req, res) => {
           username: true,
         },
       },
+      tags: {
+        select: {
+          name: true,
+          id: true,
+        },
+      },
     },
   });
   if (!post)

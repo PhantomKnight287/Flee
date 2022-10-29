@@ -13,7 +13,11 @@ const handler: NextApiHandler = async (req, res) => {
       message: "No Auth Token found",
     });
   const { title, content } = req.body;
-  const channelId = req.query.id as string
+  const tags =
+    req.body.tags instanceof Array && req.body.tags.length > 0
+      ? req.body.tags
+      : [];
+  const channelId = req.query.id as string;
   if (!title)
     return res.status(400).json({ message: "Title of post is required" });
   if (!content)
@@ -57,6 +61,9 @@ const handler: NextApiHandler = async (req, res) => {
         connect: {
           username: jwtPayload.username,
         },
+      },
+      tags: {
+        connect: (tags as string[]).map((t) => ({ id: t })),
       },
     },
     select: {
